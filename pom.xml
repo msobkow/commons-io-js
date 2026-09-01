@@ -33,11 +33,21 @@ file comparators, endian transformation classes, and much more.
   </description>
   <url>https://commons.apache.org/proper/commons-io/</url>
   <distributionManagement>
-    <site>
+    <!--site>
       <id>apache.website</id>
       <name>Apache Commons Site</name>
-      <url>scm:svn:https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-io/</url>
-    </site>
+      <url>scm:svn:https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-codec/</url>
+    </site-->
+	<repository>
+		<id>nexus-releases</id>
+		<name>Nexus release repository</name>
+		<url>http://nexus3.mcf.markhome.server:8081/repository/mcf.markhome.server-hosted/</url>
+	</repository>
+	<snapshotRepository>
+		<id>nexus-snapshots</id>
+		<name>Nexus release repository</name>
+		<url>http://nexus3.mcf.markhome.server:8081/repository/mcf.markhome.server-hosted/</url>
+	</snapshotRepository>
   </distributionManagement>
   <dependencies>
     <dependency>
@@ -96,8 +106,8 @@ file comparators, endian transformation classes, and much more.
     </dependency>
   </dependencies>
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+	<maven.compiler.source>25</maven.compiler.source>
+	<maven.compiler.target>25</maven.compiler.target>
     <commons.componentid>io</commons.componentid>
     <commons.module.name>org.apache.commons.io</commons.module.name>
     <commons.rc.version>RC2</commons.rc.version>
@@ -145,6 +155,14 @@ file comparators, endian transformation classes, and much more.
     <commons.jacoco.complexityRatio>0.85</commons.jacoco.complexityRatio>
     <!-- Java 21 and up -->
     <EnableDynamicAgentLoading></EnableDynamicAgentLoading>
+	<maven-compiler.version>3.15.0</maven-compiler.version>
+	<maven-toolchains.version>3.3.0</maven-toolchains.version>
+	<graalvm-buildtools.version>1.1.10</graalvm-buildtools.version>
+	<!--jaxb-api.version>2.4.0-b180725.0427</jaxb-api.version-->
+	<!--spring.version>4.0.5</spring.version-->
+	<!--mcf.version>3.1.42</mcf.version-->
+	<js.output.name>commons-io.js</js.output.name>
+	<!--slf4j.version>2.0.17-gov4j-1</slf4j.version-->
   </properties>
   <build>
     <!-- japicmp:cmp needs package to work from a jar -->
