@@ -122,7 +122,7 @@ class PathUtilsContentEqualsTest {
     void testContentEqualsFileSystemsMemVsZip(final Configuration configuration) throws Exception {
         final Path refDir = Paths.get("src/test/resources/dir-equals-tests");
         try (FileSystem fileSystem1 = Jimfs.newFileSystem(configuration);
-                FileSystem fileSystem2 = FileSystems.newFileSystem(refDir.resolveSibling(refDir.getFileName() + ".zip"), null)) {
+                FileSystem fileSystem2 = FileSystems.newFileSystem(refDir.resolveSibling(refDir.getFileName() + ".zip"))) {
             final Path fsDir1 = fileSystem1.getPath(refDir.getFileName().toString());
             final PathCounters copyDirectory = PathUtils.copyDirectory(refDir, fsDir1);
             assertTrue(copyDirectory.getByteCounter().get() > 0);
@@ -135,17 +135,17 @@ class PathUtilsContentEqualsTest {
         final Path zipPath = Paths.get("src/test/resources/dir-equals-tests.zip");
         final Path zipCopy = temporaryFolder.toPath().resolve("copy2.zip");
         Files.copy(zipPath, zipCopy, StandardCopyOption.REPLACE_EXISTING);
-        try (FileSystem fileSystem1 = FileSystems.newFileSystem(zipPath, null); FileSystem fileSystem2 = FileSystems.newFileSystem(zipCopy, null)) {
+        try (FileSystem fileSystem1 = FileSystems.newFileSystem(zipPath, (java.util.Map<java.lang.String,?>)null); FileSystem fileSystem2 = FileSystems.newFileSystem(zipCopy, (java.util.Map<java.lang.String,?>)null)) {
             assertContentEquals(fileSystem1, fileSystem2);
         }
         final Path emptyZip = Paths.get("src/test/resources/org/apache/commons/io/empty.zip");
-        try (FileSystem fileSystem1 = FileSystems.newFileSystem(emptyZip, null); FileSystem fileSystem2 = FileSystems.newFileSystem(emptyZip, null)) {
+        try (FileSystem fileSystem1 = FileSystems.newFileSystem(emptyZip, (java.util.Map<java.lang.String,?>)null); FileSystem fileSystem2 = FileSystems.newFileSystem(emptyZip, (java.util.Map<java.lang.String,?>)null)) {
             assertContentEquals(fileSystem1, fileSystem2);
         }
-        try (FileSystem fileSystem1 = FileSystems.newFileSystem(zipCopy, null); FileSystem fileSystem2 = FileSystems.newFileSystem(emptyZip, null)) {
+        try (FileSystem fileSystem1 = FileSystems.newFileSystem(zipCopy, (java.util.Map<java.lang.String,?>)null); FileSystem fileSystem2 = FileSystems.newFileSystem(emptyZip, (java.util.Map<java.lang.String,?>)null)) {
             assertContentNotEquals(fileSystem1, fileSystem2);
         }
-        try (FileSystem fileSystem1 = FileSystems.newFileSystem(zipPath, null); FileSystem fileSystem2 = FileSystems.newFileSystem(emptyZip, null)) {
+        try (FileSystem fileSystem1 = FileSystems.newFileSystem(zipPath, (java.util.Map<java.lang.String,?>)null); FileSystem fileSystem2 = FileSystems.newFileSystem(emptyZip, (java.util.Map<java.lang.String,?>)null)) {
             assertContentNotEquals(fileSystem1, fileSystem2);
         }
     }
@@ -199,7 +199,7 @@ class PathUtilsContentEqualsTest {
     @Test
     void testDirectoryAndFileContentEqualsDifferentFileSystemsFileVsZip() throws Exception {
         final Path dir1 = Paths.get("src/test/resources/dir-equals-tests");
-        try (FileSystem fileSystem = FileSystems.newFileSystem(dir1.resolveSibling(dir1.getFileName() + ".zip"), null)) {
+        try (FileSystem fileSystem = FileSystems.newFileSystem(dir1.resolveSibling(dir1.getFileName() + ".zip"), (java.util.Map<java.lang.String,?>)null)) {
             final Path dir2 = fileSystem.getPath("/dir-equals-tests");
             // WindowsPath, UnixPath, and ZipPath equals() methods always return false if the argument is not of the same instance as itself.
             assertDirectoryAndFileContentEquals(dir1, dir2);
@@ -216,8 +216,8 @@ class PathUtilsContentEqualsTest {
         final Path zipPath = Paths.get("src/test/resources/dir-equals-tests.zip");
         final Path zipCopy = temporaryFolder.toPath().resolve("copy1.zip");
         Files.copy(zipPath, zipCopy, StandardCopyOption.REPLACE_EXISTING);
-        try (FileSystem fileSystem1 = FileSystems.newFileSystem(zipPath, null);
-                FileSystem fileSystem2 = FileSystems.newFileSystem(zipCopy, null)) {
+        try (FileSystem fileSystem1 = FileSystems.newFileSystem(zipPath, (java.util.Map<java.lang.String,?>)null);
+                FileSystem fileSystem2 = FileSystems.newFileSystem(zipCopy, (java.util.Map<java.lang.String,?>)null)) {
             final Path dir1 = fileSystem1.getPath("/dir-equals-tests");
             final Path dir2 = fileSystem2.getPath("/dir-equals-tests");
             // WindowsPath, UnixPath, and ZipPath equals() methods always return false if the argument is not of the same instance as itself.
@@ -236,23 +236,23 @@ class PathUtilsContentEqualsTest {
         final Path zipCopy = temporaryFolder.toPath().resolve("copy1.zip");
         final Path emptyZip = Paths.get("src/test/resources/org/apache/commons/io/empty.zip");
         Files.copy(zipPath, zipCopy, StandardCopyOption.REPLACE_EXISTING);
-        try (FileSystem fileSystem1 = FileSystems.newFileSystem(zipPath, null);
-                FileSystem fileSystem2 = FileSystems.newFileSystem(emptyZip, null)) {
+        try (FileSystem fileSystem1 = FileSystems.newFileSystem(zipPath, (java.util.Map<java.lang.String,?>)null);
+                FileSystem fileSystem2 = FileSystems.newFileSystem(emptyZip, (java.util.Map<java.lang.String,?>)null)) {
             final Path dir1 = fileSystem1.getPath("/dir-equals-tests");
             final Path dir2 = fileSystem2.getPath("/");
             // WindowsPath, UnixPath, and ZipPath equals() methods always return false if the argument is not of the same instance as itself.
             assertDirectoryAndFileContentNotEquals(dir1, dir2);
         }
-        try (FileSystem fileSystem1 = FileSystems.newFileSystem(zipPath, null);
-                FileSystem fileSystem2 = FileSystems.newFileSystem(emptyZip, null)) {
+        try (FileSystem fileSystem1 = FileSystems.newFileSystem(zipPath, (java.util.Map<java.lang.String,?>)null);
+                FileSystem fileSystem2 = FileSystems.newFileSystem(emptyZip, (java.util.Map<java.lang.String,?>)null)) {
             final Path dir1 = fileSystem1.getPath("/dir-equals-tests");
             final Path dir2 = fileSystem2.getRootDirectories().iterator().next();
             // WindowsPath, UnixPath, and ZipPath equals() methods always return false if the argument is not of the same instance as itself.
             assertDirectoryAndFileContentNotEquals(dir1, dir2);
         }
         Files.copy(emptyZip, zipCopy, StandardCopyOption.REPLACE_EXISTING);
-        try (FileSystem fileSystem1 = FileSystems.newFileSystem(emptyZip, null);
-                FileSystem fileSystem2 = FileSystems.newFileSystem(zipCopy, null)) {
+        try (FileSystem fileSystem1 = FileSystems.newFileSystem(emptyZip, (java.util.Map<java.lang.String,?>)null);
+                FileSystem fileSystem2 = FileSystems.newFileSystem(zipCopy, (java.util.Map<java.lang.String,?>)null)) {
             final Path dir1 = fileSystem1.getPath("/");
             final Path dir2 = fileSystem2.getPath("/");
             // WindowsPath, UnixPath, and ZipPath equals() methods always return false if the argument is not of the same instance as itself.

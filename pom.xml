@@ -278,19 +278,27 @@ file comparators, endian transformation classes, and much more.
 					</goals>
 					<phase>package</phase>
 				</execution>
+				<!--execution>
+					<id>test-native</id>
+					<goals>
+						<goal>test</goal>
+					</goals>
+					<phase>test</phase>
+				</execution-->
 			</executions>
 			<configuration>
-				<executable>export PATH=${env.GRAAL_JDK_HOME}/bin:${env.GRAAL_JDK_HOME}/lib:${env.BASE_PATH} &amp;&amp; export GRAALVM_HOME=${env.GRAAL_JDK_HOME} &amp;&amp; export JAVA_HOME=${env.GRAAL_JDK_HOME} &amp;&amp; export JDK_HOME={env.GRAAL_JDK_HOME} &amp;&amp; native-image </executable>
+				<!--executable>export PATH=${env.GRAAL_JDK_HOME}/bin:${env.GRAAL_JDK_HOME}/lib:${env.BASE_PATH} &amp;&amp; export GRAALVM_HOME=${env.GRAAL_JDK_HOME} &amp;&amp; export JAVA_HOME=${env.GRAAL_JDK_HOME} &amp;&amp; export JDK_HOME={env.GRAAL_JDK_HOME} &amp;&amp; native-image </executable-->
 				<buildArgs>
-					<buildArg>-g</buildArg>
-					<buildArg>&#45;&#45;enable-monitoring=heapdump,jfr,jvmstat,jmxserver,jmxclient,threaddump,nmt,jccmd</buildArg>
-					<buildArg>&#45;&#45;enable-native-access=ALL-UNNAMED</buildArg>
-					<buildArg>&#45;&#45;exact-reachability-metadata</buildArg>
-					<buildArg>&#45;&#45;future-defaults</buildArg>
-					<buildArg>&#45;&#45;implicit:class</buildArg>
+					<!--buildArg>-g</buildArg-->
+					<!--buildArg>&#45;&#45;enable-monitoring=heapdump,jfr,jvmstat,jmxserver,jmxclient,threaddump,nmt,jccmd</buildArg-->
+					<!--buildArg>&#45;&#45;enable-native-access=ALL-UNNAMED</buildArg-->
+					<!--buildArg>&#45;&#45;exact-reachability-metadata</buildArg-->
+					<!--buildArg>&#45;&#45;future-defaults</buildArg-->
+					<!--buildArg>&#45;&#45;implicit:class</buildArg-->
 					<buildArg>&#45;H:+UnlockExperimentalVMOptions</buildArg>
 					<buildArg>&#45;H:Preserve=all</buildArg>
 				</buildArgs>
+				<mainClass>org.apache.commons.io.CommonsIOLibraryEntry</mainClass>
 			</configuration>
 		</plugin>
 		<plugin>
