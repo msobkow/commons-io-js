@@ -118,8 +118,20 @@ file comparators, endian transformation classes, and much more.
 			<version>${commons.jmh.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.graalvm.polyglot</groupId>
+			<artifactId>polyglot</artifactId>
+			<version>${graaljs.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.graalvm.polyglot</groupId>
+			<artifactId>js-community</artifactId>
+			<version>${graaljs.version}</version>
+			<type>pom</type>
+		</dependency>
 	</dependencies>
 	<properties>
+		<graal.mainClass>org.apache.commons.io.CommonsIOLibraryEntry</graal.mainClass>
 		<commons.distSvnStagingBase>scm:git:https://github.com/msobkow/</commons.distSvnStagingBase>
 		<commons.componentid>io</commons.componentid>
 		<commons.rc.version>${env.buildString}</commons.rc.version>
@@ -239,66 +251,6 @@ file comparators, endian transformation classes, and much more.
 			</executions>
 			<configuration>
 				<executable>export PATH=${env.JAVA_JDK_HOME}/bin:${env.JAVA_JDK_HOME}/lib:${env.BASE_PATH} &amp;&amp; export JAVA_HOME=${env.JAVA_JDK_HOME} &amp;&amp; export JDK_HOME={env.JAVA_JDK_HOME} &amp;&amp; javac </executable>
-			</configuration>
-		</plugin>
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-toolchains-plugin</artifactId>
-			<version>${maven-toolchains.version}</version>
-			<executions>
-				<execution>
-					<goals>
-						<goal>toolchain</goal>
-					</goals>
-				</execution>
-			</executions>
-			<configuration>
-				<toolchains>
-					<jdk>
-						<version>25-lts</version>
-						<vendor>adoptium</vendor>
-					</jdk>
-					<jdk>
-						<version>graalvm-ce-25</version>
-						<vendor>graalvm.org</vendor>
-					</jdk>
-				</toolchains>
-			</configuration>
-		</plugin>
-		<plugin>
-			<groupId>org.graalvm.buildtools</groupId>
-			<artifactId>native-maven-plugin</artifactId>
-			<version>${graalvm-buildtools.version}</version>
-			<extensions>true</extensions>
-			<executions>
-				<execution>
-					<id>build-native</id>
-					<goals>
-						<goal>compile-no-fork</goal>
-					</goals>
-					<phase>package</phase>
-				</execution>
-				<!--execution>
-					<id>test-native</id>
-					<goals>
-						<goal>test</goal>
-					</goals>
-					<phase>test</phase>
-				</execution-->
-			</executions>
-			<configuration>
-				<!--executable>export PATH=${env.GRAAL_JDK_HOME}/bin:${env.GRAAL_JDK_HOME}/lib:${env.BASE_PATH} &amp;&amp; export GRAALVM_HOME=${env.GRAAL_JDK_HOME} &amp;&amp; export JAVA_HOME=${env.GRAAL_JDK_HOME} &amp;&amp; export JDK_HOME={env.GRAAL_JDK_HOME} &amp;&amp; native-image </executable-->
-				<buildArgs>
-					<!--buildArg>-g</buildArg-->
-					<!--buildArg>&#45;&#45;enable-monitoring=heapdump,jfr,jvmstat,jmxserver,jmxclient,threaddump,nmt,jccmd</buildArg-->
-					<!--buildArg>&#45;&#45;enable-native-access=ALL-UNNAMED</buildArg-->
-					<!--buildArg>&#45;&#45;exact-reachability-metadata</buildArg-->
-					<!--buildArg>&#45;&#45;future-defaults</buildArg-->
-					<!--buildArg>&#45;&#45;implicit:class</buildArg-->
-					<buildArg>&#45;H:+UnlockExperimentalVMOptions</buildArg>
-					<buildArg>&#45;H:Preserve=all</buildArg>
-				</buildArgs>
-				<mainClass>org.apache.commons.io.CommonsIOLibraryEntry</mainClass>
 			</configuration>
 		</plugin>
 		<plugin>
