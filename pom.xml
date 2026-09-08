@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>server.markhome.mcf</groupId>
 			<artifactId>server.markhome.mcf.v3_1</artifactId>
-		<version>3.1.42</version>
+		<version>3.1.42-2026-09-11-11:11:11Z</version>
 	</parent>
 	<groupId>server.markhome.mcf.v3_1</groupId>
 <!--
@@ -24,7 +24,7 @@
 	 limitations under the License.
 -->
 	<artifactId>commons-io</artifactId>
-	<version>2.22.0</version>
+	<version>3.1.42-2026-09-11-11:11:11Z</version>
 	<name>Apache Commons IO</name>
 	<inceptionYear>2002</inceptionYear>
 	<description>
@@ -131,10 +131,11 @@ file comparators, endian transformation classes, and much more.
 		</dependency>
 	</dependencies>
 	<properties>
+		<commons.rc.version>MCFRC1</commons.rc.version>
+		<project.build.outputTimestamp>2026-09-11-11:11:11Z</project.build.outputTimestamp>
 		<graal.mainClass>org.apache.commons.io.CommonsIOLibraryEntry</graal.mainClass>
 		<commons.distSvnStagingBase>scm:git:https://github.com/msobkow/</commons.distSvnStagingBase>
 		<commons.componentid>io</commons.componentid>
-		<commons.rc.version>${env.buildString}</commons.rc.version>
 		<commons.distSvnStagingUrl>${commons.distSvnStagingBase}${commons.componentid}${commons.rc.version}</commons.distSvnStagingUrl>
 		<commons.module.name>org.apache.commons.${commons.componentid}</commons.module.name>
 		<commons.repo.name>commons-${commons.componentid}-js</commons.repo.name>
@@ -144,7 +145,6 @@ file comparators, endian transformation classes, and much more.
 		<commons.release.version>2.22.0</commons.release.version>
 		<commons.release.next>2.22.1</commons.release.next>
 		<commons.release.isDistModule>true</commons.release.isDistModule>
-		<!--project.build.outputTimestamp>${env.BUILD_STAMP}</project.build.outputTimestamp-->
 		<jacoco.skip>false</jacoco.skip>
 		<commons.jacoco.haltOnFailure>true</commons.jacoco.haltOnFailure>
 		<commons.jacoco.classRatio>0.92</commons.jacoco.classRatio>
